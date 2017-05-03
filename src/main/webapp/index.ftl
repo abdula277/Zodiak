@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<link rel="stylesheet" href="./webjars/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="./webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="./css/main.css"/>
+<link rel="stylesheet" href="./webjars/jquery-ui/1.12.1/jquery-ui.css">
+
 <head>
     <meta charset="UTF-8">
     <title>Zodiak Project</title>
@@ -15,19 +17,32 @@
         </div>
 
         <div class="jumbotron">
-            <h1><label for="datePicker">Введите любую дату:</label></h1>
+            <h1><label for="datepicker">Введите любую дату:</label></h1>
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
-                    <p class="lead">
-                        <input id='datePicker' type='date' required onchange='updateZodiak(value)'>
-                    </p>
-                    <p>
-                        <h2>Знак Зодиака: ${zodiak}!</h2>
-                    </p>
+                    <p class="lead"><input type="text" id="datepicker"></p>
+                    <p><h2>Знак Зодиака: <label id="zodiakField"></label>!</h2></p>
                 </div>
             </div>
         </div>
     </div>
-    <script type="application/javascript" src="/js/main.js"></script>
+    <script type="application/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src='webjars/jquery/3.2.0/jquery.min.js'></script>
+    <script type="text/javascript" src='./webjars/jquery-ui/1.12.1/jquery-ui.min.js'></script>
+    <script>
+        $( function() {
+            $("#datepicker").datepicker({
+                showButtonPanel: true,
+                changeMonth: true,
+                changeYear: true,
+                showAnim: 'slideDown',
+                dateFormat: 'yy-mm-dd',
+                onSelect: function() {
+                    $(this).change();
+                    updateZodiak($("#datepicker").val());
+                }
+            });
+        });
+    </script>
 </body>
 </html>

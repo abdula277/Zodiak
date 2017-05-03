@@ -1,15 +1,18 @@
 window.onload = setCurrentDate;
 
 function setCurrentDate() {
-    var addr = window.location.href;
-    if (addr.indexOf("date") === -1) {
-        document.getElementById("datePicker").valueAsDate = new Date();
-    }else {
-        document.getElementById("datePicker").value = addr.substring(addr.indexOf("date") + 5, addr.length);
-    }
+    var myDate = new Date();
+    var date = myDate.getFullYear() + '-' + ('0'+(myDate.getMonth()+1)).slice(-22) + '-' + ('0'+ myDate.getDate()).slice(-2);
+    $("#datepicker").val(date);
+    updateZodiak($("#datepicker").val());
 }
 
 function updateZodiak(value){
-    console.log(value);
-    window.location.href = '/?date=' + value;
+    $.ajax({
+        url: '/resolveZodiak?date=' + value,
+        dataType: "text",
+        success: function(text) {
+            $("#zodiakField").text(text);
+        }
+    });
 }
