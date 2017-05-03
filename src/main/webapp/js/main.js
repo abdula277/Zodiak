@@ -10,10 +10,10 @@ function setCurrentDate() {
 
 function updateZodiak(value){
 
-    console.log(new Date(value).toISOString());
     if (!isValidDate(value)) {
-        /*$('#le-alert').addClass('in');*/
         $('#le-alert').show();
+        console.log(value);
+        console.log(new Date(value).toISOString());
     }else {
         $.ajax({
             url: '/resolveZodiak?date=' + value,
@@ -31,11 +31,14 @@ function isValidDate(date)
 {
 
     var matches = /^(\d{4})[-\/](\d{1,2})[-\/](\d{1,2})$/.exec(date);
+
     if (matches == null) return false;
-    var m = matches[2];
-    var y = matches[1] - 1;
+    var parts = date.match(/(\d+)/g);
+    var m = matches[2] - 1; // months are 0-based
+    var y = matches[1];
     var d = matches[3];
-    var composedDate = new Date(y, m, d);
+    var line = parts[0] + "-" + parts[1] + "-" + parts[2]; //to avoid 2017-05-31-> 2017-06-01
+    var composedDate = new Date(line);
     return composedDate.getDate() == d &&
         composedDate.getMonth() == m &&
         composedDate.getFullYear() == y;
