@@ -20,8 +20,14 @@
             <h1><label for="datepicker">Введите любую дату:</label></h1>
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
-                    <p class="lead"><input type="text" id="datepicker"></p>
-                    <p><h2>Знак Зодиака: <label id="zodiakField"></label>!</h2></p>
+                    <p class="lead">
+                        <input type="text" id="datepicker">
+                    </p>
+                    <div id="le-alert" class="alert alert-danger alert-block fade in" role="alert" hidden>
+                        <strong>О нет!</strong> Дата должна быть корректной! P.S. формат: 'yyyy-MM-dd'
+                        <button href="#" type="button" class="close">&times;</button>
+                    </div>
+                    <p><h2>Знак Зодиака: <label id="zodiakField"></label>!</h2>
                 </div>
             </div>
         </div>
@@ -31,7 +37,7 @@
     <script type="text/javascript" src='./webjars/jquery-ui/1.12.1/jquery-ui.min.js'></script>
     <script>
         $( function() {
-            $("#datepicker").datepicker({
+            $("#datepicker").attr("placeholder", "mm-dd-yyyy").datepicker({
                 showButtonPanel: true,
                 changeMonth: true,
                 changeYear: true,
@@ -41,7 +47,10 @@
                     $(this).change();
                     updateZodiak($("#datepicker").val());
                 }
-            });
+            })
+        });
+        $('.close').click(function () {
+            $('#le-alert').hide();
         });
     </script>
 </body>
