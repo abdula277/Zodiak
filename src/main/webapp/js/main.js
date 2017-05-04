@@ -4,22 +4,24 @@ function setCurrentDate() {
     var myDate = new Date();
     var date = myDate.getFullYear() + '-' + ('0'+(myDate.getMonth()+1)).slice(-22) + '-' + ('0'+ myDate.getDate()).slice(-2);
     $("#datepicker").val(date);
-    updateZodiak($("#datepicker").val());
-
+    updateZodiak();
 }
 
-function updateZodiak(value){
-
+function updateZodiak(){
+    var value = $("#datepicker").val();
+    hideHoroscope();
     if (!isValidDate(value)) {
         $('#le-alert').show();
-        console.log(value);
-        console.log(new Date(value).toISOString());
+        $("#zodiakField").text("???");
+        document.getElementById('showHideHoro').disabled = true;
     }else {
         $.ajax({
             url: '/resolveZodiak?date=' + value,
             dataType: "text",
             success: function (text) {
                 $("#zodiakField").text(text);
+                $('#le-alert').hide();
+                document.getElementById('showHideHoro').disabled = false;
             }
 
         });
@@ -29,7 +31,6 @@ function updateZodiak(value){
 
 function isValidDate(date)
 {
-
     var matches = /^(\d{4})[-\/](\d{1,2})[-\/](\d{1,2})$/.exec(date);
 
     if (matches == null) return false;
@@ -42,4 +43,23 @@ function isValidDate(date)
     return composedDate.getDate() == d &&
         composedDate.getMonth() == m &&
         composedDate.getFullYear() == y;
+}
+
+function showHoroscope(){
+    $.ajax({
+        url: '/getHoroscope?date=' + $("#datepicker").val(),
+        dataType: "text",
+        success: function (text) {
+            $("#horo").text(text);
+            $("#horoDiv").show();
+            document.getElementById('showHideHoro').setAttribute( "onClick", "hideHoroscope()" );
+        }
+    });
+}
+
+function hideHoroscope() {
+    document.getElementById('showHideHoro').setAttribute( "onClick", "showHoroscope()" );
+    $("#horo").text("");
+    $("#horoDiv").hide();
+
 }

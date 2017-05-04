@@ -21,13 +21,22 @@
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <p class="lead">
-                        <input type="text" id="datepicker">
+                        <input type="text" id="datepicker" onfocusout="updateZodiak()">
                     </p>
                     <div id="le-alert" class="alert alert-danger alert-block fade in" role="alert" hidden>
                         <strong>О нет!</strong> Дата должна быть корректной! P.S. формат: 'yyyy-MM-dd'
                         <button href="#" type="button" class="close">&times;</button>
                     </div>
                     <p><h2>Знак Зодиака: <label id="zodiakField"></label>!</h2>
+                    <button type="button" id="showHideHoro" class="btn btn-default" onclick='showHoroscope()'>Показать гороскоп</button>
+                    <br>
+                    <br>
+                    <div class="alert alert-info" id="horoDiv" hidden>
+                    <div class="alert alert-info" id="horoDiv" hidden>
+                        <p id="horo">
+                        </p>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -41,11 +50,12 @@
                 showButtonPanel: true,
                 changeMonth: true,
                 changeYear: true,
+                yearRange: '1920:2020',
                 showAnim: 'slideDown',
                 dateFormat: 'yy-mm-dd',
                 onSelect: function() {
                     $(this).change();
-                    updateZodiak($("#datepicker").val());
+                    updateZodiak();
                 }
             })
         });

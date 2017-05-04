@@ -57,5 +57,4 @@ public class UtilsTests {
         ZodiakResolver.resolve(null);
     }
 
-
 }
