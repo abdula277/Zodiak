@@ -4,6 +4,7 @@ function setCurrentDate() {
     var myDate = new Date();
     var date = myDate.getFullYear() + '-' + ('0'+(myDate.getMonth()+1)).slice(-22) + '-' + ('0'+ myDate.getDate()).slice(-2);
     $("#datepicker").val(date);
+    $('#showHideHoro').unbind('click').click(showHoroscope)
     updateZodiak();
 }
 
@@ -13,7 +14,7 @@ function updateZodiak(){
     if (!isValidDate(value)) {
         $('#le-alert').show();
         $("#zodiakField").text("???");
-        document.getElementById('showHideHoro').disabled = true;
+        $('#showHideHoro').attr('disabled', 'disabled');
     }else {
         $.ajax({
             url: '/resolveZodiak?date=' + value,
@@ -21,7 +22,7 @@ function updateZodiak(){
             success: function (text) {
                 $("#zodiakField").text(text);
                 $('#le-alert').hide();
-                document.getElementById('showHideHoro').disabled = false;
+                $('#showHideHoro').attr('disabled', false);
             }
 
         });
@@ -52,13 +53,13 @@ function showHoroscope(){
         success: function (text) {
             $("#horo").text(text);
             $("#horoDiv").show();
-            document.getElementById('showHideHoro').setAttribute( "onClick", "hideHoroscope()" );
+            $('#showHideHoro').unbind('click').click(hideHoroscope);
         }
     });
 }
 
 function hideHoroscope() {
-    document.getElementById('showHideHoro').setAttribute( "onClick", "showHoroscope()" );
+    $('#showHideHoro').unbind('click').click(showHoroscope);
     $("#horo").text("");
     $("#horoDiv").hide();
 

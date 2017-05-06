@@ -28,10 +28,9 @@
                         <button href="#" type="button" class="close">&times;</button>
                     </div>
                     <p><h2>Знак Зодиака: <label id="zodiakField"></label>!</h2>
-                    <button type="button" id="showHideHoro" class="btn btn-default" onclick='showHoroscope()'>Показать гороскоп</button>
+                    <button type="button" id="showHideHoro" class="btn btn-default">Показать гороскоп</button>
                     <br>
                     <br>
-                    <div class="alert alert-info" id="horoDiv" hidden>
                     <div class="alert alert-info" id="horoDiv" hidden>
                         <p id="horo">
                         </p>
