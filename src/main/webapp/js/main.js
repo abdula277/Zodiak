@@ -1,4 +1,25 @@
-window.onload = setCurrentDate;
+window.onload = initPage;
+
+function initPage(){
+    $( function() {
+        $("#datepicker").attr("placeholder", "mm-dd-yyyy").datepicker({
+            showButtonPanel: true,
+            changeMonth: true,
+            changeYear: true,
+            yearRange: '1920:2020',
+            showAnim: 'slideDown',
+            dateFormat: 'yy-mm-dd',
+            onSelect: function() {
+                $(this).change();
+                updateZodiak();
+            }
+        })
+    });
+    $('.close').click(function () {
+        $('#le-alert').hide();
+    });
+    setCurrentDate();
+}
 
 function setCurrentDate() {
     var myDate = new Date();
@@ -22,9 +43,8 @@ function updateZodiak(){
             success: function (text) {
                 $("#zodiakField").text(text);
                 $('#le-alert').hide();
-                $('#showHideHoro').attr('disabled', false);
+                $('#showHideHoro').removeAttr('disabled');
             }
-
         });
     }
 

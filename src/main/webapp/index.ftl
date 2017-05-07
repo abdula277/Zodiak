@@ -4,6 +4,9 @@
 <link rel="stylesheet" href="./webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="./css/main.css"/>
 <link rel="stylesheet" href="./webjars/jquery-ui/1.12.1/jquery-ui.css">
+<script type="application/javascript" src="js/main.js"></script>
+<script type="text/javascript" src='webjars/jquery/3.2.0/jquery.min.js'></script>
+<script type="text/javascript" src='./webjars/jquery-ui/1.12.1/jquery-ui.min.js'></script>
 
 <head>
     <meta charset="UTF-8">
@@ -35,32 +38,9 @@
                         <p id="horo">
                         </p>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
-    <script type="application/javascript" src="js/main.js"></script>
-    <script type="text/javascript" src='webjars/jquery/3.2.0/jquery.min.js'></script>
-    <script type="text/javascript" src='./webjars/jquery-ui/1.12.1/jquery-ui.min.js'></script>
-    <script>
-        $( function() {
-            $("#datepicker").attr("placeholder", "mm-dd-yyyy").datepicker({
-                showButtonPanel: true,
-                changeMonth: true,
-                changeYear: true,
-                yearRange: '1920:2020',
-                showAnim: 'slideDown',
-                dateFormat: 'yy-mm-dd',
-                onSelect: function() {
-                    $(this).change();
-                    updateZodiak();
-                }
-            })
-        });
-        $('.close').click(function () {
-            $('#le-alert').hide();
-        });
-    </script>
 </body>
 </html>
